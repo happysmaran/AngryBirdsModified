@@ -9,9 +9,11 @@ var backgroundImg,platform;
 var bird, slingshot;
 
 var gameState = "onSling";
+var bg;
 
 function preload() {
-    backgroundImg = loadImage("sprites/bg.png");
+    backgroundImg = loadImage("bg.png");
+    time();
 }
 
 function setup(){
@@ -85,4 +87,21 @@ function keyPressed(){
     if(keyCode === 32){
        // slingshot.attach(bird.body);
     }
+}
+
+async function time(){
+    var response=await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    var responseJson=await response.json();
+    //console.log(responseJson);
+
+    var dt=responseJson.datetime;
+    var r=dt.slice(11, 13);
+    console.log(r);
+
+    if(r>06 && r<18){
+        bg="bg2.jpg";
+    }else{
+        bg="bg.png";
+    }
+    backgroundImg=loadImage(bg);
 }
