@@ -7,9 +7,10 @@ class Pig extends BaseClass {
 
  display(){
    //console.log(this.body.speed);
-   if(this.body.speed < 3){
+   if(this.body.speed < 4){
     super.display();
    }
+
    else{
      World.remove(world, this.body);
      push();
@@ -17,6 +18,10 @@ class Pig extends BaseClass {
      tint(255,this.Visiblity);
      image(this.image, this.body.position.x, this.body.position.y, 50, 50);
      pop();
+   }
+
+   if(this.body.speed > 6){
+    score=score+1;
    }
    
  }

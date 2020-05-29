@@ -11,6 +11,8 @@ var bird, slingshot;
 var gameState = "onSling";
 var bg;
 
+var score=0;
+
 /*
 i used the same backgrounds because i didnt have any othr background
 */
@@ -29,14 +31,19 @@ function setup(){
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
 
+    platform3=new Ground(400,300,250,20);
+    platform4=new Ground(1000,100,250,20);
+
     box1 = new Box(700,320,70,70);
     box2 = new Box(920,320,70,70);
-    pig1 = new Pig(810, 350, "Arnav.png");
+    pig1 = new Pig(800, 220, "Arnav.png");
+    pig2 = new Pig(820, 220, "Abhi.png");
     log1 = new Log(810,260,300, PI/2);
 
     box3 = new Box(700,240,70,70);
     box4 = new Box(920,240,70,70);
-    pig3 = new Pig(810, 220, "Abhi.png");
+    pig3 = new Pig(800, 350, "Abhi.png");
+    pig4 = new Pig(820, 350, "Arnav.png");
 
     log3 =  new Log(810,180,300, PI/2);
 
@@ -53,16 +60,17 @@ function setup(){
 function draw(){
     background(backgroundImg);
     Engine.update(engine);
-    //strokeWeight(4);
     box1.display();
     box2.display();
     ground.display();
     pig1.display();
+    pig2.display();
     log1.display();
 
     box3.display();
     box4.display();
     pig3.display();
+    pig4.display();
     log3.display();
 
     box5.display();
@@ -71,8 +79,14 @@ function draw(){
 
     bird.display();
     platform.display();
-    //log6.display();
-    slingshot.display();    
+    slingshot.display();
+    
+    platform3.display();
+    platform4.display();
+    
+    textSize(30);
+    fill(4);
+    text("score:"+score,900,20); 
 }
 
 function mouseDragged(){
@@ -89,8 +103,10 @@ function mouseReleased(){
 
 function keyPressed(){
     if(keyCode === 32){
+       bird.trajectory=[];
        slingshot.attach(bird.body);
        gameState = "onSling";
+       Matter.Body.setPosition(bird.body,{x:200,y:50});
     }
 }
 
